@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>jaoriche studio — เครดิตการซื้อขาย</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#fdf8ff;
+  --card:#fff;
+  --text:#5d5265;
+  --muted:#9c90a4;
+  --primary:#a98de3;
+  --primaryText:#fff;
+  --accent:#f7c7df;
+  --border:#eee5f2;
+  --shadow:0 12px 35px rgba(111,83,132,.10);
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:'Prompt',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+body{overflow-x:hidden}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:22px 16px 100px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-bottom:8px;
+}
+
+.admin-btn{
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:8px 14px;
+  box-shadow:var(--shadow);
+  font-size:12px;
+  text-transform:lowercase;
+}
+
+.hero{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:26px 22px;
+  text-align:center;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.avatar{
+  width:86px;
+  height:86px;
+  border-radius:50%;
+  object-fit:cover;
+  border:5px solid #fff;
+  box-shadow:0 8px 25px rgba(0,0,0,.10);
+  margin:auto;
+  display:block;
+  background:var(--accent);
+}
+
+.store-letter{
+  width:86px;
+  height:86px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:auto;
+  background:var(--primary);
+  color:var(--primaryText);
+  font-size:34px;
+  font-weight:600;
+}
+
+h1{
+  font-size:27px;
+  margin:14px 0 4px;
+}
+
+.desc{
+  color:var(--muted);
+  margin:0 auto;
+  max-width:600px;
+  line-height:1.8;
+}
+
+.banner-wrap{
+  margin-top:20px;
+  border-radius:22px;
+  overflow:hidden;
+  background:#f4edf7;
+}
+
+.banner-wrap img{
+  width:100%;
+  max-height:310px;
+  object-fit:cover;
+  display:block;
+}
+
+.banner-wrap.hidden{display:none}
+
+.stats{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:18px 0;
+}
+
+.stat{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:10px 20px;
+  border-radius:17px;
+  min-width:130px;
+}
+
+.stat b{
+  display:block;
+  font-size:20px;
+  color:var(--primary);
+}
+
+.stat span{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:26px 4px 12px;
+}
+
+.section-title h2{
+  font-size:19px;
+  margin:0;
+}
+
+.reviews{
+  display:grid;
+  gap:12px;
+}
+
+.review{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:16px;
+  box-shadow:var(--shadow);
+  animation:pop .3s ease;
+}
+
+.review-head{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.review-avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--accent);
+  color:var(--text);
+  font-weight:600;
+}
+
+.review-name{font-weight:600}
+
+.stars{
+  color:#efb84d;
+  letter-spacing:2px;
+  font-size:14px;
+}
+
+.review-date{
+  font-size:11px;
+  color:var(--muted);
+}
+
+.review-text{
+  margin:10px 0 0;
+  line-height:1.75;
+}
+
+.empty{
+  padding:40px;
+  text-align:center;
+  color:var(--muted);
+  background:var(--card);
+  border-radius:20px;
+  border:1px dashed var(--border);
+}
+
+.float-review{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  z-index:20;
+  background:var(--primary);
+  color:var(--primaryText);
+  padding:10px 18px;
+  border-radius:999px;
+  box-shadow:0 8px 24px rgba(100,70,130,.25);
+  font-size:13px;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(52,40,61,.38);
+  backdrop-filter:blur(5px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  z-index:50;
+}
+
+.modal.show{display:flex}
+
+.modal-box{
+  background:var(--card);
+  width:min(560px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:25px;
+  padding:22px;
+  box-shadow:0 25px 70px rgba(50,30,70,.2);
+}
+
+.modal-box h3{
+  margin:0 0 14px;
+}
+
+.form-grid{
+  display:grid;
+  gap:12px;
+}
+
+label{
+  font-size:12px;
+  color:var(--muted);
+  display:grid;
+  gap:6px;
+}
+
+input,textarea,select{
+  width:100%;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  border-radius:13px;
+  padding:10px 12px;
+  outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--primary);
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  justify-content:flex-end;
+  margin-top:16px;
+}
+
+.primary{
+  background:var(--primary);
+  color:var(--primaryText);
+  border-radius:13px;
+  padding:10px 16px;
+}
+
+.secondary{
+  background:#f5eff7;
+  color:var(--text);
+  border-radius:13px;
+  padding:10px 16px;
+}
+
+.danger{
+  background:#fff0f2;
+  color:#c55d70;
+  border-radius:13px;
+  padding:10px 16px;
+}
+
+.tabs{
+  display:flex;
+  gap:6px;
+  margin-bottom:18px;
+  background:#f7f1f8;
+  padding:5px;
+  border-radius:15px;
+}
+
+.tab{
+  flex:1;
+  padding:9px;
+  border-radius:11px;
+  background:transparent;
+  color:var(--muted);
+}
+
+.tab.active{
+  background:#fff;
+  color:var(--text);
+  box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.admin-panel{display:none}
+.admin-panel.show{display:block}
+
+.note{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.6;
+  background:#faf6fb;
+  border-radius:12px;
+  padding:10px;
+}
+
+/* THEME PRESETS */
+
+.theme-title{
+  font-size:13px;
+  font-weight:600;
+  margin:4px 0 8px;
+  color:var(--text);
+}
+
+.theme-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin-bottom:18px;
+}
+
+.theme-card{
+  position:relative;
+  min-height:82px;
+  padding:9px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:var(--card);
+  cursor:pointer;
+  transition:.2s;
+  overflow:hidden;
+}
+
+.theme-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 7px 18px rgba(0,0,0,.08);
+}
+
+.theme-card.active{
+  border:2px solid var(--primary);
+  box-shadow:0 0 0 3px rgba(169,141,227,.15);
+}
+
+.theme-preview{
+  display:flex;
+  height:38px;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:6px;
+}
+
+.theme-preview span{
+  flex:1;
+}
+
+.theme-name{
+  display:block;
+  text-align:center;
+  font-size:10px;
+  color:var(--text);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.heart{
+  position:fixed;
+  pointer-events:none;
+  z-index:100;
+  font-size:18px;
+  animation:heart 1s ease-out forwards;
+}
+
+@keyframes heart{
+  0%{
+    opacity:0;
+    transform:translate(-50%,0) scale(.5)
+  }
+  20%{opacity:1}
+  100%{
+    opacity:0;
+    transform:translate(-50%,-90px) scale(1.25) rotate(18deg)
+  }
+}
+
+@keyframes pop{
+  from{
+    opacity:0;
+    transform:translateY(5px)
+  }
+  to{
+    opacity:1;
+    transform:none
+  }
+}
+
+@media(max-width:700px){
+  .theme-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:560px){
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .wrap{
+    padding-top:10px;
+  }
+
+  .hero{
+    border-radius:22px;
+  }
+
+  h1{
+    font-size:24px;
+  }
+
+  .theme-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <button class="admin-btn" onclick="openAdmin()">admin</button>
+  </div>
+
+  <section class="hero">
+
+    <div id="avatarArea"></div>
+
+    <h1 id="storeName"></h1>
+
+    <p class="desc" id="storeDesc"></p>
+
+    <div class="banner-wrap" id="bannerWrap">
+      <img id="banner" alt="แบนเนอร์ร้าน">
+    </div>
+
+  </section>
+
+  <div class="stats">
+
+    <div class="stat">
+      <b id="reviewCount">0</b>
+      <span>รีวิวทั้งหมด</span>
+    </div>
+
+    <div class="stat">
+      <b id="avgRating">—</b>
+      <span>คะแนนเฉลี่ย</span>
+    </div>
+
+  </div>
+
+  <div class="section-title">
+    <h2>♡ รีวิวจากลูกค้า</h2>
+  </div>
+
+  <section class="reviews" id="reviews"></section>
+
+</div>
+
+<button class="float-review" onclick="openReview()">
+  ✎ เขียนรีวิว
+  </button>
+  <!-- REVIEW MODAL -->
+<div class="modal" id="reviewModal">
+
+  <div class="modal-box">
+
+    <h3>เขียนรีวิว ♡</h3>
+
+    <div class="form-grid">
+
+      <label>
+        ชื่อของคุณ
+        <input id="rName" maxlength="40" placeholder="เช่น น้องมายด์">
+      </label>
+
+      <label>
+        ให้คะแนน
+        <select id="rRating">
+          <option value="5">★★★★★ 5 คะแนน</option>
+          <option value="4">★★★★☆ 4 คะแนน</option>
+          <option value="3">★★★☆☆ 3 คะแนน</option>
+          <option value="2">★★☆☆☆ 2 คะแนน</option>
+          <option value="1">★☆☆☆☆ 1 คะแนน</option>
+        </select>
+      </label>
+
+      <label>
+        รีวิว
+        <textarea id="rText" maxlength="500" placeholder="เขียนความประทับใจได้เลยค่ะ"></textarea>
+      </label>
+
+    </div>
+
+    <div class="actions">
+      <button class="secondary" onclick="closeModal('reviewModal')">
+        ยกเลิก
+      </button>
+
+      <button class="primary" id="btnSubmitReview" onclick="submitReview()">
+        ส่งรีวิว
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+
+  <div class="modal-box" style="max-width:390px">
+
+    <h3>เข้าสู่ระบบแอดมิน 🔐</h3>
+
+    <label>
+      รหัสผ่าน
+      <input
+        id="adminPass"
+        type="password"
+        inputmode="numeric"
+        placeholder="รหัสแอดมิน"
+      >
+    </label>
+
+    <div class="actions">
+
+      <button
+        class="secondary"
+        onclick="closeModal('loginModal')"
+      >
+        ยกเลิก
+      </button>
+
+      <button
+        class="primary"
+        onclick="login()"
+      >
+        เข้าสู่ระบบ
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ADMIN MODAL -->
+<div class="modal" id="adminModal">
+
+  <div class="modal-box">
+
+    <h3>หลังบ้าน — jaoriche studio</h3>
+
+    <div class="tabs">
+
+      <button
+        class="tab active"
+        onclick="showTab('shop',this)"
+      >
+        ร้านค้า
+      </button>
+
+      <button
+        class="tab"
+        onclick="showTab('style',this)"
+      >
+        ธีม
+      </button>
+
+      <button
+        class="tab"
+        onclick="showTab('reviewsTab',this)"
+      >
+        รีวิว
+      </button>
+
+    </div>
+
+
+    <!-- SHOP -->
+    <div id="shop" class="admin-panel show">
+
+      <div class="form-grid">
+
+        <label>
+          ชื่อร้าน
+          <input id="aName">
+        </label>
+
+        <label>
+          รายละเอียดร้าน
+          <textarea id="aDesc"></textarea>
+        </label>
+
+        <label>
+          ลิงก์รูปโปรไฟล์
+          <input
+            id="aAvatar"
+            placeholder="วางลิงก์ Google Drive หรือ Direct Link ได้เลย"
+          >
+        </label>
+
+        <label>
+          ลิงก์รูปแบนเนอร์
+          <input
+            id="aBanner"
+            placeholder="วางลิงก์ Google Drive หรือ Direct Link ได้เลย"
+          >
+        </label>
+
+        <label>
+          รหัสแอดมินใหม่
+          <input
+            id="aPass"
+            type="password"
+            placeholder="เว้นว่างหากไม่เปลี่ยน"
+          >
+        </label>
+
+        <div class="note">
+          💡 <b>เคล็ดลับการใส่รูป</b><br>
+          สามารถก๊อปปี้ลิงก์แชร์จาก Google Drive
+          โดยตั้งค่าแชร์เป็น
+          <b>“ทุกคนที่มีลิงก์”</b>
+          แล้วนำมาวางได้เลย
+          ระบบจะแปลงเป็นรูปภาพให้อัตโนมัติ
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <button class="primary" onclick="saveShop()">
+          บันทึกข้อมูล
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- STYLE -->
+    <div id="style" class="admin-panel">
+
+      <div class="theme-title">
+        🌸 ธีมพาสเทลโทนสว่าง
+      </div>
+
+      <div class="theme-grid" id="lightThemes"></div>
+
+
+      <div class="theme-title">
+        🌙 ธีมพาสเทลโทนมืด
+      </div>
+
+      <div class="theme-grid" id="darkThemes"></div>
+
+
+      <div class="note" style="margin-bottom:12px">
+        ✨ เลือกธีมสำเร็จรูปด้านบน
+        หรือแก้สีเองด้วยรหัสสี
+        <b>#RRGGBB</b>
+      </div>
+
+
+      <div class="form-grid">
+
+        <div class="row">
+
+          <label>
+            สีพื้นหลัง
+            <input id="cBg" placeholder="#fdf8ff">
+          </label>
+
+          <label>
+            สีตัวอักษร
+            <input id="cText" placeholder="#5d5265">
+          </label>
+
+        </div>
+
+
+        <div class="row">
+
+          <label>
+            สีปุ่ม
+            <input id="cPrimary" placeholder="#a98de3">
+          </label>
+
+          <label>
+            สีตัวอักษรบนปุ่ม
+            <input id="cPrimaryText" placeholder="#ffffff">
+          </label>
+
+        </div>
+
+
+        <div class="row">
+
+          <label>
+            สีการ์ด
+            <input id="cCard" placeholder="#ffffff">
+          </label>
+
+          <label>
+            สีตกแต่ง / วงกลม
+            <input id="cAccent" placeholder="#f7c7df">
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="primary"
+          onclick="saveStyle()"
+        >
+          บันทึกธีม
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- REVIEWS -->
+    <div id="reviewsTab" class="admin-panel">
+
+      <div id="adminReviews"></div>
+
+      <div class="actions">
+
+        <button
+          class="danger"
+          onclick="clearReviews()"
+        >
+          ล้างรีวิวทั้งหมด
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button
+        class="secondary"
+        onclick="closeModal('adminModal')"
+      >
+        ปิด
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+
+const DB_URL =
+  "https://jaorichestudio-default-rtdb.firebaseio.com/data.json";
+
+const KEY =
+  "jaoriche_credit_v1";
+
+
+const defaults = {
+
+  name:"jaoriche studio",
+
+  desc:"ขอบคุณที่เข้ามาแสดงความพึงพอใจค่ะ",
+
+  avatar:"",
+
+  banner:"",
+
+  password:"160243",
+
+  colors:{
+    bg:"#fdf8ff",
+    text:"#5d5265",
+    primary:"#a98de3",
+    primaryText:"#ffffff",
+    card:"#ffffff",
+    accent:"#f7c7df"
+  },
+
+  reviews:[]
+
+};
+
+
+/* =========================
+   5 LIGHT THEMES
+========================= */
+
+const lightThemes = [
+
+  {
+    name:"Lavender Milk",
+    colors:{
+      bg:"#FDF8FF",
+      text:"#5D5265",
+      primary:"#A98DE3",
+      primaryText:"#FFFFFF",
+      card:"#FFFFFF",
+      accent:"#F7C7DF"
+    }
+  },
+
+  {
+    name:"Peach Cream",
+    colors:{
+      bg:"#FFF8F3",
+      text:"#685A55",
+      primary:"#F2A88D",
+      primaryText:"#FFFFFF",
+      card:"#FFFFFF",
+      accent:"#FFD6C7"
+    }
+  },
+
+  {
+    name:"Mint Cloud",
+    colors:{
+      bg:"#F4FFFB",
+      text:"#52645E",
+      primary:"#88CDB8",
+      primaryText:"#FFFFFF",
+      card:"#FFFFFF",
+      accent:"#C8EEE2"
+    }
+  },
+
+  {
+    name:"Baby Blue",
+    colors:{
+      bg:"#F5FAFF",
+      text:"#526070",
+      primary:"#8DB9E8",
+      primaryText:"#FFFFFF",
+      card:"#FFFFFF",
+      accent:"#CFE5FA"
+    }
+  },
+
+  {
+    name:"Lemon Milk",
+    colors:{
+      bg:"#FFFEF3",
+      text:"#665F4C",
+      primary:"#E5C86A",
+      primaryText:"#FFFFFF",
+      card:"#FFFFFF",
+      accent:"#F7E9A9"
+    }
+  }
+
+];
+
+
+/* =========================
+   5 DARK THEMES
+========================= */
+
+const darkThemes = [
+
+  {
+    name:"Night Lavender",
+    colors:{
+      bg:"#211C2B",
+      text:"#F1EAF7",
+      primary:"#A98DE3",
+      primaryText:"#FFFFFF",
+      card:"#30283D",
+      accent:"#5A466D"
+    }
+  },
+
+  {
+    name:"Midnight Rose",
+    colors:{
+      bg:"#281C25",
+      text:"#F8EAF0",
+      primary:"#D58BAA",
+      primaryText:"#FFFFFF",
+      card:"#392631",
+      accent:"#704356"
+    }
+  },
+
+  {
+    name:"Dark Mint",
+    colors:{
+      bg:"#192522",
+      text:"#E4F4EF",
+      primary:"#79C5AF",
+      primaryText:"#FFFFFF",
+      card:"#273732",
+      accent:"#3E665B"
+    }
+  },
+
+  {
+    name:"Blue Moon",
+    colors:{
+      bg:"#1B2430",
+      text:"#E8F0FA",
+      primary:"#83ACD8",
+      primaryText:"#FFFFFF",
+      card:"#293646",
+      accent:"#405873"
+    }
+  },
+
+  {
+    name:"Dark Peach",
+    colors:{
+      bg:"#2A211E",
+      text:"#F9EDE7",
+      primary:"#D99A7D",
+      primaryText:"#FFFFFF",
+      card:"#3A2C27",
+      accent:"#694A3E"
+    }
+  }
+
+];
+
+
+let data =
+  JSON.parse(
+    localStorage.getItem(KEY) || "null"
+  ) || defaults;
+
+
+data = {
+  ...defaults,
+  ...data,
+
+  colors:{
+    ...defaults.colors,
+    ...(data.colors || {})
+  },
+
+  reviews:
+    Array.isArray(data.reviews)
+      ? data.reviews
+      : []
+
+};
+
+
+/*
+  สถานะแอดมิน
+  เมื่อเข้าสู่ระบบแล้วจะไม่หลุด
+  ตอนกดบันทึกข้อมูลหรือธีม
+*/
+
+let isAdminLoggedIn = false;
+
+
+/* =========================
+   IMAGE LINK
+========================= */
+
+function fixImageUrl(url){
+
+  if(!url) return "";
+
+  url = url.trim();
+
+  if(url.includes("drive.google.com")){
+
+    const match =
+      url.match(
+        /\/d\/([a-zA-Z0-9_-]+)/
+      )
+      ||
+      url.match(
+        /id=([a-zA-Z0-9_-]+)/
+      );
+
+    if(match && match[1]){
+
+      return `https://lh3.googleusercontent.com/d/${match[1]}`;
+
+    }
+
+  }
+
+
+  if(url.includes("dropbox.com")){
+
+    return url
+      .replace(
+        "www.dropbox.com",
+        "dl.dropboxusercontent.com"
+      )
+      .replace("?dl=0","");
+
+  }
+
+
+  return url;
+
+}
+
+
+/* =========================
+   FIREBASE SYNC
+========================= */
+
+async function syncWithFirebase(){
+
+  try{
+
+    const res =
+      await fetch(DB_URL);
+
+    if(res.ok){
+
+      const fbData =
+        await res.json();
+
+      if(fbData){
+
+        data = {
+
+          ...defaults,
+          ...fbData,
+
+          colors:{
+            ...defaults.colors,
+            ...(fbData.colors || {})
+          },
+
+          reviews:
+            Array.isArray(fbData.reviews)
+              ? fbData.reviews
+              : []
+
+        };
+
+
+        localStorage.setItem(
+          KEY,
+          JSON.stringify(data)
+        );
+
+
+        apply();
+
+
+        if(isAdminLoggedIn){
+
+          document
+            .getElementById("adminModal")
+            .classList.add("show");
+
+        }
+
+      }
+      else{
+
+        await persist();
+
+      }
+
+    }
+
+  }
+  catch(err){
+
+    console.error(
+      "Fetch Firebase error:",
+      err
+    );
+
+  }
+
+}
+
+
+/* =========================
+   SAVE FIREBASE
+========================= */
+
+async function persist(){
+
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(data)
+  );
+
+  try{
+
+    await fetch(DB_URL,{
+
+      method:"PUT",
+
+      headers:{
+        "Content-Type":
+          "application/json"
+      },
+
+      body:
+        JSON.stringify(data)
+
+    });
+
+  }
+  catch(err){
+
+    console.error(
+      "Save to Firebase error:",
+      err
+    );
+
+  }
+
+}
+
+
+/* =========================
+   COLOR
+========================= */
+
+function validColor(v){
+
+  return /^#[0-9a-fA-F]{6}$/.test(v);
+
+}
+
+
+/* =========================
+   APPLY
+========================= */
+
+function apply(){
+
+  const c =
+    data.colors;
+
+
+  Object.entries({
+
+    bg:c.bg,
+    text:c.text,
+    primary:c.primary,
+    primaryText:c.primaryText,
+    card:c.card,
+    accent:c.accent
+
+  }).forEach(([k,v])=>{
+
+    if(validColor(v)){
+
+      document.documentElement
+        .style
+        .setProperty(
+          "--"+k,
+          v
+        );
+
+    }
+
+  });
+
+
+  document.getElementById(
+    "storeName"
+  ).textContent =
+    data.name;
+
+
+  document.getElementById(
+    "storeDesc"
+  ).textContent =
+    data.desc;
+
+
+  const av =
+    document.getElementById(
+      "avatarArea"
+    );
+
+
+  const avatarUrl =
+    fixImageUrl(data.avatar);
+
+
+  if(avatarUrl){
+
+    av.innerHTML = `
+      <img
+        class="avatar"
+        src="${esc(avatarUrl)}"
+        onerror="handleAvatarError(this)"
+      >
+    `;
+
+  }
+  else{
+
+    showAvatarFallback();
+
+  }
+
+
+  const bw =
+    document.getElementById(
+      "bannerWrap"
+    );
+
+  const bi =
+    document.getElementById(
+      "banner"
+    );
+
+
+  const bannerUrl =
+    fixImageUrl(data.banner);
+
+
+  if(bannerUrl){
+
+    bw.classList.remove(
+      "hidden"
+    );
+
+    bi.src =
+      bannerUrl;
+
+    bi.onerror = () =>
+      bw.classList.add(
+        "hidden"
+      );
+
+  }
+  else{
+
+    bw.classList.add(
+      "hidden"
+    );
+
+  }
+
+
+  renderReviews();
+
+}
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+function esc(s){
+
+  return String(s ?? "")
+    .replace(
+      /[&<>"']/g,
+      m => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[m])
+    );
+
+}
+  // ===== AVATAR FALLBACK =====
+function setAvatar(img){
+  img.onerror = function(){
+    this.onerror = null;
+    this.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+        <rect width="160" height="160" rx="80" fill="#F3E9FF"/>
+        <circle cx="80" cy="62" r="28" fill="#C7A9E8"/>
+        <path d="M32 138c6-28 24-43 48-43s42 15 48 43" fill="#C7A9E8"/>
+      </svg>
+    `);
+  };
+}
+
+
+// ===== RENDER PUBLIC =====
+function renderPublic(){
+  document.getElementById("storeName").textContent =
+    data.store.name || "jaoriche studio";
+
+  document.getElementById("storeDesc").textContent =
+    data.store.desc || "ร้านค้าของเรา";
+
+  const avatar = document.getElementById("profileImg");
+  avatar.src = data.store.profile || "";
+  setAvatar(avatar);
+
+  const banner = document.getElementById("bannerImg");
+
+  if(data.store.banner){
+    banner.src = data.store.banner;
+    banner.style.display = "block";
+    document.getElementById("bannerEmpty").style.display = "none";
+  }else{
+    banner.removeAttribute("src");
+    banner.style.display = "none";
+    document.getElementById("bannerEmpty").style.display = "flex";
+  }
+
+  renderReviews();
+}
+
+
+// ===== REVIEWS =====
+function renderReviews(){
+  const box = document.getElementById("reviewsList");
+  const reviews = Array.isArray(data.reviews) ? data.reviews : [];
+
+  document.getElementById("reviewCount").textContent =
+    reviews.length;
+
+  if(!reviews.length){
+    document.getElementById("averageRating").textContent = "ยังไม่มีคะแนน";
+    box.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">♡</div>
+        <div>ยังไม่มีรีวิว</div>
+        <small>เป็นคนแรกที่เขียนรีวิวให้ร้านนี้ได้เลย</small>
+      </div>
+    `;
+    return;
+  }
+
+  const total = reviews.reduce((sum,r)=>{
+    return sum + Number(r.rating || 0);
+  },0);
+
+  const avg = total / reviews.length;
+
+  document.getElementById("averageRating").textContent =
+    avg.toFixed(1) + " / 5";
+
+  box.innerHTML = reviews.map((r,index)=>{
+    const rating = Math.max(
+      0,
+      Math.min(5, Number(r.rating || 0))
+    );
+
+    const stars =
+      "★".repeat(rating) +
+      "☆".repeat(5-rating);
+
+    return `
+      <div class="review-card">
+        <div class="review-top">
+          <div class="review-avatar">
+            ${escapeHTML((r.name || "A").charAt(0).toUpperCase())}
+          </div>
+
+          <div class="review-info">
+            <div class="review-name">
+              ${escapeHTML(r.name || "ลูกค้า")}
+            </div>
+
+            <div class="review-date">
+              ${escapeHTML(r.date || "")}
+            </div>
+          </div>
+
+          <div class="review-stars">
+            ${stars}
+          </div>
+        </div>
+
+        <div class="review-text">
+          ${escapeHTML(r.text || "")}
+        </div>
+
+        ${
+          isAdminLoggedIn
+          ? `
+            <button
+              class="delete-review"
+              onclick="deleteReview(${index})"
+            >
+              ลบรีวิว
+            </button>
+          `
+          : ""
+        }
+      </div>
+    `;
+  }).join("");
+}
+
+
+// ===== REVIEW MODAL =====
+function openReview(){
+  document.getElementById("reviewModal")
+    .classList.add("show");
+
+  document.getElementById("reviewName").focus();
+}
+
+function closeReview(){
+  document.getElementById("reviewModal")
+    .classList.remove("show");
+}
+
+function submitReview(){
+  const name =
+    document.getElementById("reviewName").value.trim();
+
+  const rating =
+    Number(document.getElementById("reviewRating").value);
+
+  const text =
+    document.getElementById("reviewText").value.trim();
+
+  if(!name){
+    alert("กรุณาใส่ชื่อของคุณ");
+    return;
+  }
+
+  if(!rating || rating < 1 || rating > 5){
+    alert("กรุณาเลือกคะแนน 1 - 5 ดาว");
+    return;
+  }
+
+  if(!text){
+    alert("กรุณาเขียนข้อความรีวิว");
+    return;
+  }
+
+  const now = new Date();
+
+  const date =
+    now.toLocaleDateString("th-TH",{
+      day:"numeric",
+      month:"short",
+      year:"numeric"
+    });
+
+  if(!Array.isArray(data.reviews)){
+    data.reviews = [];
+  }
+
+  data.reviews.unshift({
+    name:name,
+    rating:rating,
+    text:text,
+    date:date
+  });
+
+  persist();
+
+  document.getElementById("reviewName").value = "";
+  document.getElementById("reviewRating").value = "5";
+  document.getElementById("reviewText").value = "";
+
+  closeReview();
+
+  renderReviews();
+
+  alert("ขอบคุณสำหรับรีวิว ♡");
+}
+
+
+// ===== ADMIN LOGIN =====
+function openAdmin(){
+  if(isAdminLoggedIn){
+    openAdminPanel();
+    return;
+  }
+
+  document.getElementById("loginModal")
+    .classList.add("show");
+
+  document.getElementById("loginPassword").value = "";
+
+  setTimeout(()=>{
+    document.getElementById("loginPassword").focus();
+  },100);
+}
+
+function closeLogin(){
+  document.getElementById("loginModal")
+    .classList.remove("show");
+}
+
+function login(){
+  const password =
+    document.getElementById("loginPassword").value;
+
+  if(password !== String(data.admin.password || "")){
+    alert("รหัสผ่านไม่ถูกต้อง");
+    return;
+  }
+
+  isAdminLoggedIn = true;
+
+  closeLogin();
+
+  openAdminPanel();
+
+  renderReviews();
+}
+
+function logoutAdmin(){
+  isAdminLoggedIn = false;
+
+  document.getElementById("adminModal")
+    .classList.remove("show");
+
+  renderReviews();
+}
+
+
+// ===== ADMIN PANEL =====
+function openAdminPanel(){
+  fillAdmin();
+
+  document.getElementById("adminModal")
+    .classList.add("show");
+}
+
+function closeAdmin(){
+  document.getElementById("adminModal")
+    .classList.remove("show");
+}
+
+
+// ===== FILL ADMIN FORM =====
+function fillAdmin(){
+  document.getElementById("aName").value =
+    data.store.name || "";
+
+  document.getElementById("aDesc").value =
+    data.store.desc || "";
+
+  document.getElementById("aProfile").value =
+    data.store.profile || "";
+
+  document.getElementById("aBanner").value =
+    data.store.banner || "";
+
+  document.getElementById("aPass").value = "";
+
+  renderThemeButtons();
+}
+
+
+// ===== SAVE SHOP =====
+function saveShop(){
+  data.store.name =
+    document.getElementById("aName").value.trim();
+
+  data.store.desc =
+    document.getElementById("aDesc").value.trim();
+
+  data.store.profile =
+    convertImageURL(
+      document.getElementById("aProfile").value.trim()
+    );
+
+  data.store.banner =
+    convertImageURL(
+      document.getElementById("aBanner").value.trim()
+    );
+
+  const newPassword =
+    document.getElementById("aPass").value.trim();
+
+  if(newPassword){
+    data.admin.password = newPassword;
+  }
+
+  persist();
+
+  renderPublic();
+
+  fillAdmin();
+
+  document.getElementById("adminModal")
+    .classList.add("show");
+
+  alert("บันทึกข้อมูลร้านเรียบร้อยแล้ว ♡");
+}
+
+
+// ===== SAVE STYLE =====
+function saveStyle(){
+  const values = {
+    bg:document.getElementById("cBg").value.trim(),
+    card:document.getElementById("cCard").value.trim(),
+    text:document.getElementById("cText").value.trim(),
+    muted:document.getElementById("cMuted").value.trim(),
+    primary:document.getElementById("cPrimary").value.trim(),
+    primaryText:document.getElementById("cPrimaryText").value.trim(),
+    accent:document.getElementById("cAccent").value.trim(),
+    border:document.getElementById("cBorder").value.trim()
+  };
+
+  for(const key in values){
+    if(!isValidColor(values[key])){
+      alert(
+        "โค้ดสีไม่ถูกต้องในช่อง " + key +
+        "\nกรุณาใช้รูปแบบ เช่น #F5EFFF"
+      );
+      return;
+    }
+  }
+
+  data.colors = values;
+
+  applyTheme();
+
+  persist();
+
+  fillAdmin();
+
+  document.getElementById("adminModal")
+    .classList.add("show");
+
+  alert("บันทึกธีมเรียบร้อยแล้ว ♡");
+}
+
+
+// ===== RENDER THEME BUTTONS =====
+function renderThemeButtons(){
+  const box =
+    document.getElementById("themePresets");
+
+  if(!box) return;
+
+  box.innerHTML = "";
+
+  const groups = [
+    {
+      title:"☀️ ธีมพาสเทลสว่าง",
+      type:"light",
+      themes:LIGHT_THEMES
+    },
+    {
+      title:"🌙 ธีมพาสเทลดาร์ก",
+      type:"dark",
+      themes:DARK_THEMES
+    }
+  ];
+
+  groups.forEach(group=>{
+    const title =
+      document.createElement("div");
+
+    title.className = "theme-group-title";
+    title.textContent = group.title;
+
+    box.appendChild(title);
+
+    Object.keys(group.themes).forEach(key=>{
+      const theme = group.themes[key];
+
+      const button =
+        document.createElement("button");
+
+      button.type = "button";
+      button.className = "theme-preset";
+
+      button.innerHTML = `
+        <span
+          class="theme-dot"
+          style="
+            background:${theme.primary};
+            box-shadow:
+              0 0 0 5px ${theme.bg};
+          "
+        ></span>
+
+        <span class="theme-preset-text">
+          <strong>${escapeHTML(theme.name)}</strong>
+          <small>${group.type === "dark" ? "Dark Pastel" : "Light Pastel"}</small>
+        </span>
+      `;
+
+      button.onclick = ()=>{
+        selectTheme(key,group.type);
+      };
+
+      box.appendChild(button);
+    });
+  });
+}
+
+
+// ===== SELECT PRESET =====
+function selectTheme(key,type){
+  const source =
+    type === "dark"
+    ? DARK_THEMES
+    : LIGHT_THEMES;
+
+  const theme = source[key];
+
+  if(!theme) return;
+
+  data.colors = {
+    bg:theme.bg,
+    card:theme.card,
+    text:theme.text,
+    muted:theme.muted,
+    primary:theme.primary,
+    primaryText:theme.primaryText,
+    accent:theme.accent,
+    border:theme.border
+  };
+
+  applyTheme();
+
+  fillAdmin();
+
+  document.getElementById("adminModal")
+    .classList.add("show");
+}
+
+
+// ===== ADMIN TABS =====
+function switchTab(tab){
+  document.querySelectorAll(".admin-tab")
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
+
+  document.querySelectorAll(".admin-section")
+    .forEach(section=>{
+      section.classList.remove("active");
+    });
+
+  const button =
+    document.querySelector(
+      `.admin-tab[data-tab="${tab}"]`
+    );
+
+  const section =
+    document.getElementById("admin-" + tab);
+
+  if(button){
+    button.classList.add("active");
+  }
+
+  if(section){
+    section.classList.add("active");
+  }
+}
+
+
+// ===== DELETE REVIEW =====
+function deleteReview(index){
+  if(!isAdminLoggedIn) return;
+
+  const review =
+    data.reviews[index];
+
+  if(!review) return;
+
+  const ok = confirm(
+    `ต้องการลบรีวิวของ "${review.name || "ลูกค้า"}" หรือไม่?`
+  );
+
+  if(!ok) return;
+
+  data.reviews.splice(index,1);
+
+  persist();
+
+  renderReviews();
+}
+
+
+// ===== HEART EFFECT =====
+function createHeart(){
+  const heart =
+    document.createElement("div");
+
+  heart.className = "heart-float";
+  heart.textContent = "♡";
+
+  heart.style.left =
+    Math.random() * 100 + "vw";
+
+  heart.style.animationDuration =
+    (3 + Math.random() * 3) + "s";
+
+  heart.style.fontSize =
+    (14 + Math.random() * 20) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },6000);
+}
+
+setInterval(()=>{
+  if(Math.random() > 0.45){
+    createHeart();
+  }
+},3500);
+
+
+// ===== CLOSE MODALS BY BACKDROP =====
+document.addEventListener("click",function(e){
+
+  if(e.target.id === "reviewModal"){
+    closeReview();
+  }
+
+  if(e.target.id === "loginModal"){
+    closeLogin();
+  }
+
+  if(e.target.id === "adminModal"){
+    closeAdmin();
+  }
+
+});
+
+
+// ===== ESC KEY =====
+document.addEventListener("keydown",function(e){
+
+  if(e.key !== "Escape") return;
+
+  closeReview();
+  closeLogin();
+  closeAdmin();
+
+});
+
+
+// ===== ENTER LOGIN =====
+document.getElementById("loginPassword")
+  .addEventListener("keydown",function(e){
+
+    if(e.key === "Enter"){
+      login();
+    }
+
+  });
+
+
+// ===== INITIAL RENDER =====
+applyTheme();
+
+renderPublic();
+
+
+// ===== FIREBASE INITIAL SYNC =====
+syncWithFirebase();
+
+
+// ===== KEEP ADMIN SESSION =====
+window.addEventListener("beforeunload",function(){
+  try{
+    localStorage.setItem(
+      "jaoriche_admin_session",
+      isAdminLoggedIn ? "1" : "0"
+    );
+  }catch(e){}
+});
+
+
+// ===== RESTORE ADMIN SESSION =====
+try{
+  const savedSession =
+    localStorage.getItem(
+      "jaoriche_admin_session"
+    );
+
+  if(savedSession === "1"){
+    isAdminLoggedIn = true;
+  }
+}catch(e){}
+
+
+// ===== REFRESH PUBLIC AFTER RESTORE =====
+setTimeout(()=>{
+  renderPublic();
+
+  if(isAdminLoggedIn){
+    renderReviews();
+  }
+},100);
+
+
+// ===== AUTO SAVE LOCAL BACKUP =====
+setInterval(()=>{
+  try{
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(data)
+    );
+  }catch(e){}
+},5000);
+
+
+// ===== INITIAL DATA CHECK =====
+if(!data.store){
+  data.store = {
+    name:"jaoriche studio",
+    desc:"เครดิตการซื้อขายของร้าน",
+    profile:"",
+    banner:""
+  };
+}
+
+if(!data.admin){
+  data.admin = {
+    password:"160243"
+  };
+}
+
+if(!Array.isArray(data.reviews)){
+  data.reviews = [];
+}
+
+if(!data.colors){
+  data.colors = {
+    ...DEFAULT_COLORS
+  };
+}
+
+applyTheme();
+renderPublic();
+
+</script>
+
+</body>
+</html>
